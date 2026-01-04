@@ -1,0 +1,36 @@
+services:
+  task-runners:
+    image: n8nio/runners:1.121.0
+    hostname: "n8n-runner-{{.Task.Slot}}"
+    environment:
+      - N8N_RUNNERS_TASK_BROKER_URI=http://worker:5679   # point to WORKER’s broker
+      - N8N_RUNNERS_AUTH_TOKEN=${N8N_RUNNERS_AUTH_TOKEN}
+      - N8N_RUNNERS_STDLIB_ALLOW=*
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODE_FUNCTION_ALLOW_EXTERNAL=*
+      - N8N_RUNNERS_EXTERNAL_ALLOW=*
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - TZ=America/Sao_Paulo
+    depends_on: [worker]
+    networks: [n8n-net]
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        limits: { cpus: "1", memory: 1024M }
+      update_config:
+        parallelism: 1
+        delay: 30s
+        order: start-first
+        failure_action: rollback
+networks:
+  n8n-net:
+    external: true
+    #driver: overlay
+    #attachable: true
+  proxy:
+    external: true
+  internal:
+    external: true
