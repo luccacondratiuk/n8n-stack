@@ -2,7 +2,7 @@ services:
   task-runners:
     image: n8n/custom-taskrunner
     build:
-      context: images/task-runner
+      context: ../images/task-runner
       dockerfile: ./Dockerfile
     hostname: "n8n-runner-{{.Task.Slot}}"
     environment:
