@@ -6,7 +6,7 @@ services:
       dockerfile: ./Dockerfile
     hostname: "n8n-runner-{{.Task.Slot}}"
     environment:
-      - N8N_RUNNERS_TASK_BROKER_URI=http://172.20.0.6:5679   # point to WORKER’s broker
+      - N8N_RUNNERS_TASK_BROKER_URI=http://172.20.0.5:5679   # point to WORKER’s broker
       - N8N_RUNNERS_AUTH_TOKEN=${N8N_RUNNERS_AUTH_TOKEN}
       - N8N_RUNNERS_STDLIB_ALLOW=*
       - NODE_FUNCTION_ALLOW_BUILTIN=*
