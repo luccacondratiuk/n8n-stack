@@ -1,6 +1,6 @@
 services:
   task-runners:
-    image: n8n/custom-taskrunner
+    #image: n8n/custom-taskrunner
     build:
       context: ../images/task-runner
       dockerfile: ./Dockerfile
