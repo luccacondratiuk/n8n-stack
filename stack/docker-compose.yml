@@ -15,7 +15,8 @@ services:
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
     #depends_on: [worker]
-    networks: [n8n-net]
+    networks: [n8n_
+n8n-net]
     deploy:
       mode: replicated
       replicas: 1
@@ -29,7 +30,7 @@ services:
         order: start-first
         failure_action: rollback
 networks:
-  n8n-net:
+  n8n_n8n-net:
     external: true
     #driver: overlay
     #attachable: true
